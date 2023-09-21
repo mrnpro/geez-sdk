@@ -1,39 +1,40 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Geez SDK
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+The Geez SDK is a powerful software development kit that simplifies the conversion between numeric values and their corresponding Geez script representations. It provides developers with a seamless way to incorporate Geez numeral conversion into their applications, enabling localization and cultural relevance for Geez-speaking communities.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Convert numeric values to Geez script representations.
+- Convert Geez script representations to numeric values.
 
-## Getting started
+## Installation
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+To use the Geez SDK in your Flutter project, follow these steps:
 
-## Usage
+1. Add the following dependency to your `pubspec.yaml` file:
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  geez: ^1.0.0
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+2. Run the following command to fetch the package:
+```bash
+flutter pub get
+```
+3. Import the Geez package in your Dart code:
+```dart 
+import 'package:geez/geez.dart';
+```
+## Usage
+### Convert a Number to Geez
+```dart 
+String geezRepresentation = 134.toGeez();
+print(geezRepresentation); // Outputs: ፻፴፬
+```
+### Convert Geez to a Number
+```dart 
+num number = '፻፴፬'.toArabic();
+print(number); // Outputs: 134
+```
+# Contributions
+Contributions to the Geez SDK are welcomed and encouraged! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the GitHub repository.
