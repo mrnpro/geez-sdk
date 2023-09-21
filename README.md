@@ -15,7 +15,7 @@ To use the Geez SDK in your Flutter project, follow these steps:
 
 ```yaml
 dependencies:
-  geez: ^1.0.0
+  geez: ^0.0.1
 ```
 2. Run the following command to fetch the package:
 ```bash
