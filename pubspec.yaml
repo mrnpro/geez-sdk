@@ -1,7 +1,7 @@
 name: geez
 description: Flutter library that simplifies the conversion between numeric values and their corresponding Geez script representations.
 version: 0.0.1
-repository: https://github.com/mrnpro/ChapaFlutter
+repository: https://github.com/mrnpro/geez-sdk
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
