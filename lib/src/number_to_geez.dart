@@ -46,7 +46,7 @@ extension NumberToGeezConvertor on int {
 
       // Add the digit to the list keeping their placements (for 26 -> 20 , 6)
       for(int i=0; (digito>0 && iter%2 == 0); i++){
-        //gets the idi
+        //gets the individual digits
           int digit = digito%10;
           if(i==1){
               digit = digito*10;
@@ -72,11 +72,11 @@ extension NumberToGeezConvertor on int {
 
     // Iterate over the digits in reverse order.
     for (int i = splitedDigits.length; i > 0; i=i-2) {
-      // Add the current component (power of 10) to the list.
+      // Add the current component (power of 100) to the list.
 
       componentList.add(sum);
 
-      // Multiply the sum by 10 for the next iteration.
+      // Multiply the sum by 100 for the next iteration.
       sum *= 100;
     }
     // Reverse the list to get the correct order of components.
@@ -102,7 +102,7 @@ extension NumberToGeezConvertor on int {
         String geezNum1 = geezNumbers[splitedDigits[index]] ?? '';
         String geezNum2 = geezNumbers[splitedDigits[index+1]] ?? '';
         String sthGeez = geezNumbers[componentList[index]] ?? '';
-        geezRep += geezNum1 + geezNum1 + sthGeez;
+        geezRep += geezNum1 + geezNum2 + sthGeez;
       }
     }
     // Return the final Geez representation of the number.
