@@ -40,12 +40,12 @@ extension NumberToGeezConvertor on int {
   List<int> _splitNumbers(int number) {
     List<int> splitedDigits = [];
     int iter=1;
-    while (number > 0 && iter%2 == 0) {
+    while (number > 0 || iter%2 == 1) {  //continues one more step ahead than it normally would when the number of digits are odd (so that we can consistently use the components)
       // Get the rightmost two-digits of the number.
       int digito = number % 100;
 
       // Add the digit to the list keeping their placements (for 26 -> 20 , 6)
-      for(int i=0; (digito>0 && iter%2 == 0); i++){
+      for(int i=0; (digito>0 || iter%2 == 1); i++){
         //gets the individual digits
           int digit = digito%10;
           if(i==1){
