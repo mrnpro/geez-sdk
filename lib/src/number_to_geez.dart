@@ -94,7 +94,7 @@ extension NumberToGeezConvertor on int {
   /// Returns the Geez numeric representation of the number.
   String _driveGeezRepresentation(List<int> splitedDigits, List componentList) {
     String geezRep = '';
-    for (int index = 0, j=0; index < splitedDigits.length; index=index+2, j++) {
+    for (int index = 0, j=0; j < componentList.length; index=index+2, j++) {
       // Check if the product of the current digit and its corresponding component
       // is present in the geezNumbers map.
       if (geezNumbers
