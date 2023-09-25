@@ -98,7 +98,7 @@ extension NumberToGeezConvertor on int {
       // Check if the product of the current digit and its corresponding component
       // is present in the geezNumbers map.
       if (geezNumbers
-          .containsKey(componentList[j]) && splitedDigits[index] == 0 && splittedDigits[index + 1] == 1) {
+          .containsKey(componentList[j]) && splitedDigits[index] == 0 && splitedDigits[index + 1] == 1) {
         // Add the Geez representation of the product to the result.
         geezRep +=
             geezNumbers[componentList[j]] ?? '';
