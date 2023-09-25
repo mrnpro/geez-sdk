@@ -46,7 +46,7 @@ extension NumberToGeezConvertor on int {
       int digito = number % 100;
 
       // Add the digit to the list keeping their placements (for 26 -> 20 , 6)
-      for(int i=0; (digito>0 || iter%2 == 1); i++){
+      for(int i=0; i<2; i++){
         //gets the individual digits
           int digit = digito%10;
           if(i==1){
