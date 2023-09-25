@@ -88,20 +88,20 @@ extension NumberToGeezConvertor on int {
   /// Returns the Geez numeric representation of the number.
   String _driveGeezRepresentation(List<int> splitedDigits, List componentList) {
     String geezRep = '';
-    for (int index = 0; index < splitedDigits.length; index=index+2) {
+    for (int index = 0, j=0; index < splitedDigits.length, j<componentList.length ; index=index+2, j++) {
       // Check if the product of the current digit and its corresponding component
       // is present in the geezNumbers map.
       if (geezNumbers
-          .containsKey(splitedDigits[index] * componentList[index])) {
+          .containsKey(splitedDigits[index] * componentList[j])) {
         // Add the Geez representation of the product to the result.
         geezRep +=
-            geezNumbers[splitedDigits[index] * componentList[index]] ?? '';
+            geezNumbers[splitedDigits[index] * componentList[j]] ?? '';
       } else {
         // If the product is not in the map, add the individual Geez representations
         // of the digit and its corresponding component to the result.
         String geezNum1 = geezNumbers[splitedDigits[index]] ?? '';
         String geezNum2 = geezNumbers[splitedDigits[index+1]] ?? '';
-        String sthGeez = geezNumbers[componentList[index]] ?? '';
+        String sthGeez = geezNumbers[componentList[j]] ?? '';
         geezRep += geezNum1 + geezNum2 + sthGeez;
       }
     }
