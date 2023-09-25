@@ -39,13 +39,14 @@ extension NumberToGeezConvertor on int {
   /// Returns a list of individual digits.
   List<int> _splitNumbers(int number) {
     List<int> splitedDigits = [];
-    int iter=1;
-    while (number > 0 || iter%2 == 1) {  //continues one more step ahead than it normally would when the number of digits are odd (so that we can consistently use the components)
+    int iter=0;
+    while (number >= 0) {  //continues one more step ahead than it normally would when the number of digits are odd (so that we can consistently use the components)
       // Get the rightmost two-digits of the number.
+      if(number > 0){
       int digito = number % 100;
 
       // Add the digit to the list keeping their placements (for 26 -> 20 , 6)
-      for(int i=0; (digito>0 || iter%2 == 1); i++){
+      for(int i=0; i<2; i++){
         //gets the individual digits
           int digit = digito%10;
           if(i==1){
@@ -55,9 +56,14 @@ extension NumberToGeezConvertor on int {
           digito = digito ~/ 10;
           iter++;
       }
-      
-      // Remove the rightmost two-digits from the number.
-      number = number ~/ 100;
+        // Remove the rightmost two-digits from the number.
+        number = number ~/ 100;
+      } else if(number == 0 && iter%2 == 1){
+        splitedDigits.add(number);
+        break;
+      } else {
+        break;
+      }
     }
     // Reverse the list to get the correct order of digits.
     return splitedDigits.reversed.toList();
@@ -88,14 +94,19 @@ extension NumberToGeezConvertor on int {
   /// Returns the Geez numeric representation of the number.
   String _driveGeezRepresentation(List<int> splitedDigits, List componentList) {
     String geezRep = '';
-    for (int index = 0, j=0; index < splitedDigits.length; index=index+2, j++) {
+    for (int index = 0, j=0; j < componentList.length; index=index+2, j++) {
       // Check if the product of the current digit and its corresponding component
       // is present in the geezNumbers map.
+      if(componentList[j] != 1){
       if (geezNumbers
-          .containsKey(splitedDigits[index] * componentList[j])) {
+          .containsKey(componentList[j]) && splitedDigits[index] == 0 && splitedDigits[index + 1] == 1) {
         // Add the Geez representation of the product to the result.
         geezRep +=
-            geezNumbers[splitedDigits[index] * componentList[j]] ?? '';
+            geezNumbers[componentList[j]] ?? '';
+      } else if(geezNumbers
+          .containsKey(splitedDigits[index] * componentList[j])){
+        geezRep +=
+            geezNumbers[splitedDigits[index + 1] * componentList[j]] ?? '';
       } else {
         // If the product is not in the map, add the individual Geez representations
         // of the digit and its corresponding component to the result.
@@ -103,6 +114,11 @@ extension NumberToGeezConvertor on int {
         String geezNum2 = geezNumbers[splitedDigits[index+1]] ?? '';
         String sthGeez = geezNumbers[componentList[j]] ?? '';
         geezRep += geezNum1 + geezNum2 + sthGeez;
+      }
+      } else {
+        String geezNum1 = geezNumbers[splitedDigits[index]] ?? '';
+        String geezNum2 = geezNumbers[splitedDigits[index+1]] ?? '';
+        geezRep += geezNum1 + geezNum2;
       }
     }
     // Return the final Geez representation of the number.
