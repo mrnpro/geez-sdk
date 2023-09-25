@@ -118,7 +118,7 @@ extension NumberToGeezConvertor on int {
       } else {
         String geezNum1 = geezNumbers[splitedDigits[index]] ?? '';
         String geezNum2 = geezNumbers[splitedDigits[index+1]] ?? '';
-        geezRep += geezNum1 + geezNum2
+        geezRep += geezNum1 + geezNum2;
       }
     }
     // Return the final Geez representation of the number.
