@@ -40,8 +40,9 @@ extension NumberToGeezConvertor on int {
   List<int> _splitNumbers(int number) {
     List<int> splitedDigits = [];
     int iter=1;
-    while (number > 0 || iter%2 == 1) {  //continues one more step ahead than it normally would when the number of digits are odd (so that we can consistently use the components)
+    while (number >= 0) {  //continues one more step ahead than it normally would when the number of digits are odd (so that we can consistently use the components)
       // Get the rightmost two-digits of the number.
+      if(number > 0){
       int digito = number % 100;
 
       // Add the digit to the list keeping their placements (for 26 -> 20 , 6)
@@ -55,9 +56,14 @@ extension NumberToGeezConvertor on int {
           digito = digito ~/ 10;
           iter++;
       }
-      
-      // Remove the rightmost two-digits from the number.
-      number = number ~/ 100;
+        // Remove the rightmost two-digits from the number.
+        number = number ~/ 100;
+      } else if(number == 0 && iter%2 == 1){
+        splitedDigits.add(number);
+        break;
+      } else {
+        break;
+      }
     }
     // Reverse the list to get the correct order of digits.
     return splitedDigits.reversed.toList();
