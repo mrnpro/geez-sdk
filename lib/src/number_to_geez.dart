@@ -39,7 +39,7 @@ extension NumberToGeezConvertor on int {
   /// Returns a list of individual digits.
   List<int> _splitNumbers(int number) {
     List<int> splitedDigits = [];
-    int iter=1;
+    int iter=0;
     while (number >= 0) {  //continues one more step ahead than it normally would when the number of digits are odd (so that we can consistently use the components)
       // Get the rightmost two-digits of the number.
       if(number > 0){
