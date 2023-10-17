@@ -99,6 +99,9 @@ extension NumberToGeezConvertor on int {
       String geezNum1 = geezNumbers[splitedDigits[index]] ?? '';
       String geezNum2 = geezNumbers[splitedDigits[index+1]] ?? '';
       String sthGeez = geezNumbers[componentList[j]] ?? '';
+      if(componentList[j] == 1){
+        sthGeez = '';
+      }
       if(splitedDigits[index] == 0 && splitedDigits[index+1] == 1 && index == 0){
         if(componentList.length == 1){
           geezRep += geezNum2;
