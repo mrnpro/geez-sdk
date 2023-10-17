@@ -94,8 +94,30 @@ extension NumberToGeezConvertor on int {
   /// Returns the Geez numeric representation of the number.
   String _driveGeezRepresentation(List<int> splitedDigits, List componentList) {
     String geezRep = '';
+    //Modific version of the algorithm (Made by Dagim Mesfin)
     for (int index = 0, j=0; j < componentList.length; index=index+2, j++) {
-      // Check if the product of the current digit and its corresponding component
+
+      if(splitedDigits[index] == 0 && splitedDigits[index+1] == 1 && index = 0){
+        if(componentList[j] == 1){
+          geezRep += geezNumbers[splitedDigits[index+1]];
+        }
+        else{
+          geezRep += geezNumbers[componentList[j]];
+        }
+      }
+      else if(splitedDigits[index] == 0 && splitedDigits[index+1] == 0){
+        geezRep += '';
+      }
+      else{
+        String geezNum1 = geezNumbers[splitedDigits[index]] ?? '';
+        String geezNum2 = geezNumbers[splitedDigits[index+1]] ?? '';
+        String sthGeez = geezNumbers[componentList[j]] ?? '';
+        geezRep += geezNum1 + geezNum2 + sthGeez;
+      }
+
+
+      
+      /* // Check if the product of the current digit and its corresponding component
       // is present in the geezNumbers map.
       if(componentList[j] != 1){
       if (geezNumbers
@@ -120,6 +142,10 @@ extension NumberToGeezConvertor on int {
         String geezNum2 = geezNumbers[splitedDigits[index+1]] ?? '';
         geezRep += geezNum1 + geezNum2;
       }
+      */
+
+
+      
     }
     // Return the final Geez representation of the number.
     return geezRep;
