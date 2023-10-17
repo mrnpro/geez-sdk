@@ -10,10 +10,20 @@ void main() {
   group(
     'Geez Conversion Tests',
     () => {
-      test('Convert a number to Geez - Specific Number', () {
+      test('Convert a number to Geez - Specific Number #1', () {
         // Convert a specific number to Geez representation
         String geezRepresentation = 134.toGeez();
         expect(geezRepresentation, '፻፴፬');
+      }),
+      test('Convert a number to Geez - Specific Number #2', () {
+        // Convert a specific number to Geez representation
+        String geezRepresentation = 1000001.toGeez();
+        expect(geezRepresentation, '፻፼፩');
+      }),
+      test('Convert a number to Geez - Specific Number #3', () {
+        // Convert a specific number to Geez representation
+        String geezRepresentation = 19876.toGeez();
+        expect(geezRepresentation, '፼፺፰፻፸፮');
       }),
       test('Convert a number to Geez - Multiple Numbers', () {
         // Convert multiple numbers to Geez representation
@@ -31,7 +41,7 @@ void main() {
       test('Convert Geez to Number - Multiple Numbers', () {
         // Convert multiple Geez representations to numbers
         for (var i = 0; i < numbersList.length; i++) {
-          num convertedFromGeez = mockGeezNumbers[i].toArabic();
+          num convertedFromGeez = mockGeezNumber[i].toArabic();
           expect(convertedFromGeez, numbersList[i]);
         }
       }),

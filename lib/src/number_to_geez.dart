@@ -96,22 +96,24 @@ extension NumberToGeezConvertor on int {
     String geezRep = '';
     //Modific version of the algorithm (Made by Dagim Mesfin)
     for (int index = 0, j=0; j < componentList.length; index=index+2, j++) {
-
-      if(splitedDigits[index] == 0 && splitedDigits[index+1] == 1 && index = 0){
-        if(componentList[j] == 1){
-          geezRep += geezNumbers[splitedDigits[index+1]];
+      String geezNum1 = geezNumbers[splitedDigits[index]] ?? '';
+      String geezNum2 = geezNumbers[splitedDigits[index+1]] ?? '';
+      String sthGeez = geezNumbers[componentList[j]] ?? '';
+      if(componentList[j] == 1){
+        sthGeez = '';
+      }
+      if(splitedDigits[index] == 0 && splitedDigits[index+1] == 1 && index == 0){
+        if(componentList.length == 1){
+          geezRep += geezNum2;
         }
         else{
-          geezRep += geezNumbers[componentList[j]];
+          geezRep += sthGeez;
         }
       }
       else if(splitedDigits[index] == 0 && splitedDigits[index+1] == 0){
         geezRep += '';
       }
       else{
-        String geezNum1 = geezNumbers[splitedDigits[index]] ?? '';
-        String geezNum2 = geezNumbers[splitedDigits[index+1]] ?? '';
-        String sthGeez = geezNumbers[componentList[j]] ?? '';
         geezRep += geezNum1 + geezNum2 + sthGeez;
       }
 
