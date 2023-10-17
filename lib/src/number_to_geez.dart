@@ -100,7 +100,7 @@ extension NumberToGeezConvertor on int {
       String geezNum2 = geezNumbers[splitedDigits[index+1]] ?? '';
       String sthGeez = geezNumbers[componentList[j]] ?? '';
       if(splitedDigits[index] == 0 && splitedDigits[index+1] == 1 && index == 0){
-        if(componentList[j] == 1){
+        if(componentList.length == 1){
           geezRep += geezNum2;
         }
         else{
