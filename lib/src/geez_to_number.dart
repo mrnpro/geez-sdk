@@ -77,7 +77,7 @@ extension GeezToArabicConvertor on String {
           }
         }
         expo -= 2;
-        mult = (pow(10, expo)).toInt;
+        mult = (pow(10, expo)).toInt();
       }
       else if(i == elfyosh.length - 1){
         if(geezNum.length == 2){
