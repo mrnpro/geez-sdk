@@ -41,7 +41,7 @@ void main() {
       test('Convert Geez to Number - Multiple Numbers', () {
         // Convert multiple Geez representations to numbers
         for (var i = 0; i < numbersList.length; i++) {
-          num convertedFromGeez = mockGeezNumber[i].toArabic();
+          num convertedFromGeez = mockGeezNumbers[i].toArabic();
           expect(convertedFromGeez, numbersList[i]);
         }
       }),
