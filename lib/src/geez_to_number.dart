@@ -1,4 +1,5 @@
 import 'constants.dart';
+import 'dart:math';
 
 /// A utility extension for converting Geez numbers to Arabic numbers.
 ///
@@ -26,25 +27,10 @@ extension GeezToArabicConvertor on String {
       return result;
     }
 
-    // Split the String into individual characters.
-    List<String> separatedGeezs = _splitNumbersStrings(this);
-
     // Calculate the Arabic representation of the Geez number.
-    final arabicRepresentation = _driveArabicRepresentation(separatedGeezs);
+    final arabicRepresentation = _driveArabicRepresentation(this);
 
     return arabicRepresentation;
-  }
-
-  /// Splits a string into individual characters.
-  ///
-  /// Returns a List of individual character strings.
-  List<String> _splitNumbersStrings(String string) {
-    List<String> splitedStrings = [];
-    for (var rune in string.runes) {
-      var character = String.fromCharCode(rune);
-      splitedStrings.add(character);
-    }
-    return splitedStrings;
   }
 
   /// Performs a quick reverse find operation on the `geezNumbers` map.
@@ -59,42 +45,37 @@ extension GeezToArabicConvertor on String {
   /// Calculates the Arabic representation of the Geez number.
   ///
   /// Returns the Arabic numeric representation of the Geez number.
-  int _driveArabicRepresentation(List<String> separatedGeezs) {
-    int sum = 0;
-    num? indexToJump;
-    for (var i = 0; i < separatedGeezs.length; i++) {
-      // `indexToJump` is the next index we multiplied with the last index,
-      // so we don't have to check next time as we have already used it.
-      if (indexToJump == i) {
-        continue;
+  int _driveArabicRepresentation(String GeezNum) {
+    var elfyosh = ['፻፼፼፼', '፼፼፼', '፻፼፼', '፼፼', '፻፼', '፼', '፻', ''];
+    let num = 0;
+    let before_elf = '';
+    let asrand = '';
+    for(let i = 0; i < elfyosh.length; i++){
+      if(i < elfyosh.length - 1){
+        if(GeezNum.contains(elfyosh[i])){
+          before_elf = GeezNum.substring(0, GeezNum.indexOf(elfyosh[i]) + elfyosh[i].length);
+          GeezNum = GeezNum.substring(GeezNum.indexOf(elfyosh[i]) + elfyosh[i].length, GeezNum.length)
+          if(before_elf.length - elfyosh[i].length == 2){
+            asrand = before_elf.substring(0, 2);
+            num += ((geezNumbers[asrand[0]] + geezNumbers[asrand[1]]) * geezNumbers[elfyosh[i]]);
+          }
+          else if(before_elf.length - elfyosh[i].length == 1){
+            asrand = before_elf[0];
+            num += (geezNumbers[asrand] * geezNumbers[elfyosh[i]]);
+          }
+          else{
+            num += geezNumber[elfyosh[i]];
+          }
+        }
       }
-
-      // The current index Geez.
-      final currentGeez = separatedGeezs[i];
-      final nextIndex = i + 1;
-
-      String? nextGeez;
-      // Check if the index exists in the `separatedGeezs` List to prevent an index out of bounds exception.
-      if (nextIndex >= 0 && nextIndex < separatedGeezs.length) {
-        nextGeez = separatedGeezs[i + 1];
-      }
-
-      // Search the key using value and get the current ASCII value.
-      final asciiCurrent = geezNumbers.keys.firstWhere(
-          (key) => geezNumbers[key] == currentGeez,
-          orElse: () => -1);
-
-      // Search the key using value and get the next ASCII value.
-      final asciiNext = hundredTo1M.keys
-          .firstWhere((key) => hundredTo1M[key] == nextGeez, orElse: () => -1);
-
-      if (asciiNext != -1) {
-        indexToJump = i + 1;
-        sum += (asciiNext * asciiCurrent);
-      } else {
-        sum += asciiCurrent;
+      else if(i == elfyosh.length - 1){
+        if(GeezNum.length == 2){
+          num += geezNumbers[GeezNum[0]] + geezNumbers[GeezNum[1]];
+        }
+        else if(GeezNum.length == 1){
+          num += geezNumbers[GeezNum];
+        }
       }
     }
-    return sum;
-  }
+    return num;
 }
