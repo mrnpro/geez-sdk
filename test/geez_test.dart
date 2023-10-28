@@ -33,10 +33,20 @@ void main() {
           expect(convertedToGeez, mockGeezNumbers[i]);
         }
       }),
-      test('Convert Geez to Number - Specific Number', () {
+      test('Convert Geez to Number - Specific Number #1', () {
         // Convert a specific Geez representation to number
         num number = '፻፴፬'.toArabic();
         expect(number, 134);
+      }),
+      test('Convert Geez to Number - Specific Number #2', () {
+        // Convert a specific Geez representation to number
+        num number = '፻፼፩'.toArabic();
+        expect(number, 1000001);
+      }),
+      test('Convert Geez to Number - Specific Number #3', () {
+        // Convert a specific Geez representation to number
+        num number = '፼፺፰፻፸፮'.toArabic();
+        expect(number, 19876);
       }),
       test('Convert Geez to Number - Multiple Numbers', () {
         // Convert multiple Geez representations to numbers
