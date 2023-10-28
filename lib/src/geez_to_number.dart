@@ -1,4 +1,5 @@
 import 'constants.dart';
+import "dart:math";
 
 /// A utility extension for converting Geez numbers to Arabic numbers.
 ///
@@ -45,34 +46,50 @@ extension GeezToArabicConvertor on String {
   ///
   /// Returns the Arabic numeric representation of the Geez number.
   int _driveArabicRepresentation(String GeezNum) {
-    String elfyosh = ['፻፼፼፼', '፼፼፼', '፻፼፼', '፼፼', '፻፼', '፼', '፻', ''];
+    List<String> elfyosh = ['፻፼፼፼', '፼፼፼', '፻፼፼', '፼፼', '፻፼', '፼', '፻', ''];
+    List<String> ando = ['፩', '፪', '፫', '፬', '፭', '፮', '፯', '፰', '፱'];
+    List<String> asro = ['፲', '፳', '፴', '፵', '፶', '፷', '፸', '፹', '፺'];
     int numeric = 0;
+    int expo = 14;
+    int mult = pow(10, expo);
     String before_elf = '';
     String asrand = '';
     for(int i = 0; i < elfyosh.length; i++){
       if(i < elfyosh.length - 1){
         if(GeezNum.contains(elfyosh[i])){
           before_elf = GeezNum.substring(0, GeezNum.indexOf(elfyosh[i]) + elfyosh[i].length);
-          GeezNum = GeezNum.substring(GeezNum.indexOf(elfyosh[i]) + elfyosh[i].length, GeezNum.length)
+          GeezNum = GeezNum.substring(GeezNum.indexOf(elfyosh[i]) + elfyosh[i].length, GeezNum.length);
           if(before_elf.length - elfyosh[i].length == 2){
             asrand = before_elf.substring(0, 2);
-            numeric += ((geezNumbers[asrand[0]] + geezNumbers[asrand[1]]) * geezNumbers[elfyosh[i]]);
+            numeric += int((((asro.indexOf(asrand[0]) + 1) * 10) + (ando.indexOf(asrand[1]) + 1)) * mult);
           }
           else if(before_elf.length - elfyosh[i].length == 1){
             asrand = before_elf[0];
-            numeric += (geezNumbers[asrand] * geezNumbers[elfyosh[i]]);
+            if(ando.contains(asrand)){
+              numeric += int((ando.indexOf(asrand) + 1));
+            }
+            else if(asro.contains(asrand)){
+              numeric += int((asro.indexOf(asrand) + 1) * 10);
+            }
           }
           else{
-            numeric += geezNumber[elfyosh[i]];
+            numeric += mult;
           }
         }
+        expo -= 2;
+        mult = pow(10, expo);
       }
       else if(i == elfyosh.length - 1){
         if(GeezNum.length == 2){
-          numeric += geezNumbers[GeezNum[0]] + geezNumbers[GeezNum[1]];
+          numeric += int(((asro.indexOf(GeezNum[0]) + 1) * 10) + (ando.indexOf(GeezNum[1]) + 1));
         }
         else if(GeezNum.length == 1){
-          numeric += geezNumbers[GeezNum];
+          if(ando.contains(GeezNum)){
+            numeric += int((ando.indexOf(GeezNum) + 1));
+          }
+          else if(asro.contains(GeezNum)){
+            numeric += int((asro.indexOf(GeezNum) + 1) * 10);
+          }
         }
       }
     }
