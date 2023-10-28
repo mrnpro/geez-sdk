@@ -66,10 +66,10 @@ extension GeezToArabicConvertor on String {
           else if(beforeElf.length - elfyosh[i].length == 1){
             asrand = beforeElf[0];
             if(ando.contains(asrand)){
-              numeric += ((ando.indexOf(asrand) + 1)).toInt();
+              numeric += ((ando.indexOf(asrand) + 1) * mult).toInt();
             }
             else if(asro.contains(asrand)){
-              numeric += ((asro.indexOf(asrand) + 1) * 10).toInt();
+              numeric += (((asro.indexOf(asrand) + 1) * 10) * mult).toInt();
             }
           }
           else{
