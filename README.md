@@ -43,4 +43,5 @@ Contributions to the Geez SDK are welcomed and encouraged! If you find any issue
 Thanks to the following people who have contributed to this project:
 
 @mrnpro
+
 @DagmMesfin
