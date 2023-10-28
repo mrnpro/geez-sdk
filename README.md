@@ -38,3 +38,10 @@ print(number); // Outputs: 134
 ```
 # Contributions
 Contributions to the Geez SDK are welcomed and encouraged! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the GitHub repository.
+
+# Contributors
+Thanks to the following people who have contributed to this project:
+
+Natinael Fikadu - [@mrnpro](https://github.com/mrnpro)
+
+Dagim Mesfin - [@DagmMesfin](https://github.com/DagmMesfin)
