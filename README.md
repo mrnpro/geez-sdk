@@ -42,6 +42,6 @@ Contributions to the Geez SDK are welcomed and encouraged! If you find any issue
 # Contributors
 Thanks to the following people who have contributed to this project:
 
-[@mrnpro](https://github.com/mrnpro)
+Natinael Fikadu - [@mrnpro](https://github.com/mrnpro)
 
-[@DagmMesfin](https://github.com/DagmMesfin)
+Dagim Mesfin - [@DagmMesfin](https://github.com/DagmMesfin)
