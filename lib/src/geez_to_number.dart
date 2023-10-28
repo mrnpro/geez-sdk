@@ -1,5 +1,4 @@
 import 'constants.dart';
-import 'dart:math';
 
 /// A utility extension for converting Geez numbers to Arabic numbers.
 ///
@@ -46,36 +45,36 @@ extension GeezToArabicConvertor on String {
   ///
   /// Returns the Arabic numeric representation of the Geez number.
   int _driveArabicRepresentation(String GeezNum) {
-    var elfyosh = ['፻፼፼፼', '፼፼፼', '፻፼፼', '፼፼', '፻፼', '፼', '፻', ''];
-    let num = 0;
-    let before_elf = '';
-    let asrand = '';
-    for(let i = 0; i < elfyosh.length; i++){
+    String elfyosh = ['፻፼፼፼', '፼፼፼', '፻፼፼', '፼፼', '፻፼', '፼', '፻', ''];
+    int numeric = 0;
+    String before_elf = '';
+    String asrand = '';
+    for(int i = 0; i < elfyosh.length; i++){
       if(i < elfyosh.length - 1){
         if(GeezNum.contains(elfyosh[i])){
           before_elf = GeezNum.substring(0, GeezNum.indexOf(elfyosh[i]) + elfyosh[i].length);
           GeezNum = GeezNum.substring(GeezNum.indexOf(elfyosh[i]) + elfyosh[i].length, GeezNum.length)
           if(before_elf.length - elfyosh[i].length == 2){
             asrand = before_elf.substring(0, 2);
-            num += ((geezNumbers[asrand[0]] + geezNumbers[asrand[1]]) * geezNumbers[elfyosh[i]]);
+            numeric += ((geezNumbers[asrand[0]] + geezNumbers[asrand[1]]) * geezNumbers[elfyosh[i]]);
           }
           else if(before_elf.length - elfyosh[i].length == 1){
             asrand = before_elf[0];
-            num += (geezNumbers[asrand] * geezNumbers[elfyosh[i]]);
+            numeric += (geezNumbers[asrand] * geezNumbers[elfyosh[i]]);
           }
           else{
-            num += geezNumber[elfyosh[i]];
+            numeric += geezNumber[elfyosh[i]];
           }
         }
       }
       else if(i == elfyosh.length - 1){
         if(GeezNum.length == 2){
-          num += geezNumbers[GeezNum[0]] + geezNumbers[GeezNum[1]];
+          numeric += geezNumbers[GeezNum[0]] + geezNumbers[GeezNum[1]];
         }
         else if(GeezNum.length == 1){
-          num += geezNumbers[GeezNum];
+          numeric += geezNumbers[GeezNum];
         }
       }
     }
-    return num;
+    return numeric;
 }
