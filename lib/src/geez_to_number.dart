@@ -51,7 +51,7 @@ extension GeezToArabicConvertor on String {
     List<String> asro = ['፲', '፳', '፴', '፵', '፶', '፷', '፸', '፹', '፺'];
     int numeric = 0;
     int expo = 14;
-    int mult = int.parse(pow(10, expo));
+    int mult = toInt(pow(10, expo));
     String beforeElf = '';
     String asrand = '';
     for(int i = 0; i < elfyosh.length; i++){
@@ -61,15 +61,15 @@ extension GeezToArabicConvertor on String {
           geezNum = geezNum.substring(geezNum.indexOf(elfyosh[i]) + elfyosh[i].length, geezNum.length);
           if(beforeElf.length - elfyosh[i].length == 2){
             asrand = beforeElf.substring(0, 2);
-            numeric += int.parse((((asro.indexOf(asrand[0]) + 1) * 10) + (ando.indexOf(asrand[1]) + 1)) * mult);
+            numeric += toInt((((asro.indexOf(asrand[0]) + 1) * 10) + (ando.indexOf(asrand[1]) + 1)) * mult);
           }
           else if(beforeElf.length - elfyosh[i].length == 1){
             asrand = beforeElf[0];
             if(ando.contains(asrand)){
-              numeric += int.parse((ando.indexOf(asrand) + 1));
+              numeric += toInt((ando.indexOf(asrand) + 1));
             }
             else if(asro.contains(asrand)){
-              numeric += int.parse((asro.indexOf(asrand) + 1) * 10);
+              numeric += toInt((asro.indexOf(asrand) + 1) * 10);
             }
           }
           else{
@@ -77,18 +77,18 @@ extension GeezToArabicConvertor on String {
           }
         }
         expo -= 2;
-        mult = int.parse(pow(10, expo));
+        mult = toInt(pow(10, expo));
       }
       else if(i == elfyosh.length - 1){
         if(geezNum.length == 2){
-          numeric += int.parse(((asro.indexOf(geezNum[0]) + 1) * 10) + (ando.indexOf(geezNum[1]) + 1));
+          numeric += toInt(((asro.indexOf(geezNum[0]) + 1) * 10) + (ando.indexOf(geezNum[1]) + 1));
         }
         else if(geezNum.length == 1){
           if(ando.contains(geezNum)){
-            numeric += int.parse((ando.indexOf(geezNum) + 1));
+            numeric += toInt((ando.indexOf(geezNum) + 1));
           }
           else if(asro.contains(geezNum)){
-            numeric += int.parse((asro.indexOf(geezNum) + 1) * 10);
+            numeric += toInt((asro.indexOf(geezNum) + 1) * 10);
           }
         }
       }
