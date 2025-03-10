@@ -114,6 +114,15 @@ void main(List<String> args) {
       RegExp(r'version:\s*\d+\.\d+\.\d+'), 'version: $newVersion');
   pubspecFile.writeAsStringSync(pubspecContent);
 
+  // Get package name from pubspec.yaml
+  final packageNameMatch =
+      RegExp(r'name:\s*([^\s]+)').firstMatch(pubspecContent);
+  if (packageNameMatch == null) {
+    print('Could not find package name in pubspec.yaml');
+    exit(1);
+  }
+  final packageName = packageNameMatch.group(1)!;
+
   // Update README.md
   final readmeFile = File('README.md');
   if (readmeFile.existsSync()) {
@@ -121,13 +130,12 @@ void main(List<String> args) {
 
     // Update version in installation instructions
     readmeContent = readmeContent.replaceAll(RegExp(r'''dependencies:\s*
-  your_package:\s*\^?\d+\.\d+\.\d+'''), '''dependencies:
-  your_package: ^$newVersion''');
+  [\w_-]+:\s*\^?\d+\.\d+\.\d+'''), '''dependencies:
+  $packageName: ^$newVersion''');
 
     // Update version badge if it exists
-    readmeContent = readmeContent.replaceAll(
-        RegExp(r'pub/v/your_package\)]\(.*?\)'),
-        'pub/v/your_package)](https://pub.dev/packages/your_package/versions/$newVersion)');
+    readmeContent = readmeContent.replaceAll(RegExp(r'pub/v/[\w_-]+\)]\(.*?\)'),
+        'pub/v/$packageName)](https://pub.dev/packages/$packageName/versions/$newVersion)');
 
     readmeFile.writeAsStringSync(readmeContent);
   }
